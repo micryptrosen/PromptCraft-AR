@@ -6,7 +6,7 @@ import {Button} from 'SpectaclesUIKit.lspkg/Scripts/Components/Button/Button';
 import {FlexLayout} from 'SpectaclesUIKit.lspkg/Scripts/Components/Layout2D/Flex/FlexLayout';
 import {FlexItem} from 'SpectaclesUIKit.lspkg/Scripts/Components/Layout2D/Flex/FlexItem';
 import {FlexDirection,FlexAlign,FlexAlignSelf} from 'SpectaclesUIKit.lspkg/Scripts/Components/Layout2D/Flex/FlexTypes';
-import {LabSnapshot,LabAction,optionsFor,instructionFor} from './PromptCraftLabState';
+import {LabSnapshot,LabAction,optionsFor,instructionFor,changedStoryFields,lastChangeFor} from './PromptCraftLabState';
 const TYPE_SCALE={heading:{size:48,weight:700},body:{size:39,weight:500}};
 function applyTextRole(t:Text,role:'heading'|'body'):void{t.size=TYPE_SCALE[role].size;(t as Text & {weight?:number}).weight=TYPE_SCALE[role].weight;}
 interface Face {object:SceneObject;text:Text;action:string}
@@ -55,10 +55,10 @@ export class PromptCraftLabUI extends BaseScriptComponent {
   if(line)lines.push(line);this.texts.AssembledPrompt.text=lines.join('\n');
   this.texts.Provenance.text=s.disclosure;
   this.texts.Instruction.text=instructionFor(s);
-  this.texts.Changed.text=s.changed||'No timer • choose, inspect, refine';
+  this.texts.Changed.text=lastChangeFor(s);
   ['Setting','Problem','Resolution'].forEach((n,i)=>{
    const k=['setting','problem','resolution'][i] as 'setting'|'problem'|'resolution';
-   const changed=s.changed.includes(i===0?'setting':i===1?'problem':'resolution')||s.changed.includes('wording')||s.changed.includes('labels');
+   const changed=changedStoryFields(s).includes(k);
    this.texts[n+'Title'].text=(changed?'Δ ':'')+(i+1)+' • '+n;
    this.texts[n].text=s.step==='compare'&&s.before?(i===2?'UNCHANGED\n'+s.story[k].replace(/^[123] [A-Z]+\n/, ''):'BEFORE\n'+s.before[k].replace(/^[123] [A-Z]+\n/, '')+'\nNOW\n'+s.story[k].replace(/^[123] [A-Z]+\n/, '')):s.story[k];
   });

@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {PromptCraftLabSession as Session,DISCLOSURE,optionsFor,promptFor,storyFor} from '../Assets/Scripts/PromptCraftLabState.ts';
+import {instructionFor,changedStoryFields,lastChangeFor} from '../Assets/Scripts/PromptCraftLabState.ts';
 const act=(s,a)=>s.act(a,s.snapshot().revision);
 const at=(step)=>{const s=new Session();while(s.snapshot().step!==step){assert.equal(act(s,'next'),true);}return s;};
 test('vague start, persistent prepared offline provenance, obvious Begin',()=>{const s=new Session().snapshot();assert.equal(s.step,'start');assert.equal(s.prompt,'Write me a story.');assert.match(s.disclosure,/offline.*authored.*not live AI/);assert.equal(optionsFor(s).length,0);});
@@ -51,4 +52,50 @@ test('Discover remains independent, distinct by audience and different from coop
   assert.notEqual(r,storyFor({...c,intent:'cooperate'}).resolution);resolutions.push(r);
  }
  assert.equal(new Set(resolutions).size,3);
+});
+
+test('cooperation names both participants and solves each context without a repair-only assumption',()=>{
+ for(const audience of ['none','young','adult'])for(const form of ['none','beats','sentences']){
+  let resolution;
+  for(const context of ['none','garden','station']){
+   const story=storyFor({intent:'cooperate',audience,context,form});
+   assert.match(story.resolution,/Mira and Jo/);
+   assert.match(story.resolution,/together/);
+   assert.match(story.resolution,/sol(?:ve|ution)/);
+   assert.doesNotMatch(story.resolution,/repair|\bthem\b/);
+   if(resolution!==undefined)assert.equal(story.resolution,resolution);
+   resolution=story.resolution;
+  }
+ }
+});
+
+test('form feedback maps every structure change and clear to all three visible deltas',()=>{
+ const s=at('form');
+ for(const form of ['beats','sentences','none']){
+  const before=s.snapshot();assert.equal(act(s,'choose:form:'+form),true);const after=s.snapshot();
+  assert.match(after.changed,/output structure/);assert.doesNotMatch(after.changed,/labels/);
+  const actual=Object.keys(after.story).filter(key=>after.story[key]!==before.story[key]);
+  assert.deepEqual(changedStoryFields(after).sort(),actual.sort());assert.equal(actual.length,3);
+  if(form==='beats')for(const value of Object.values(after.story))assert.match(value,/^[123] [A-Z]+\n/);
+  else for(const value of Object.values(after.story))assert.doesNotMatch(value,/^[123] [A-Z]+\n/);
+ }
+});
+
+test('change mapping is precise and navigation qualifies a retained last-change cue',()=>{
+ for(const [key,fields] of [['intent',['resolution']],['audience',['setting','problem','resolution']],['context',['setting','problem']]]){
+  const s=at(key);act(s,'choose:'+key+':'+{intent:'cooperate',audience:'young',context:'garden'}[key]);
+  const selected=s.snapshot();assert.deepEqual(changedStoryFields(selected),fields);
+  assert.match(lastChangeFor(selected),/^Last change: /);act(s,'next');
+  assert.equal(lastChangeFor(s.snapshot()),lastChangeFor(selected));
+ }
+ assert.deepEqual(changedStoryFields(new Session().snapshot()),[]);
+});
+
+test('learner copy introduces AI practice and closes with fit, evaluation, refinement and uncertainty',()=>{
+ const start=instructionFor(new Session().snapshot());assert.match(start,/Practice.*AI/);assert.match(start,/Begin/);assert.match(start,/inspect/);assert.equal(start.split('\n').length,2);
+ const s=at('predict');const wording=optionsFor(s.snapshot()).find(o=>o.action==='predict:wording');
+ assert.match(wording.label,/Target reader/i);assert.doesNotMatch(wording.label,/level|wording/i);
+ act(s,'predict:setting');act(s,'next');const complete=instructionFor(s.snapshot());
+ for(const concept of [/reader/,/purpose/,/check/i,/refine/,/more detail is not always better/i,/Real AI/,/wrong/,/incomplete/,/unexpected/])assert.match(complete,concept);
+ assert.ok(complete.split('\n').length<=3);
 });

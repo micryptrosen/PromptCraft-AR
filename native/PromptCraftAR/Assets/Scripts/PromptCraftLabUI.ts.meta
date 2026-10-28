@@ -1,0 +1,58 @@
+- !<AssetImportMetadata/50c6e2f5-b959-47c5-af61-b3b3dcc59d74>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 754036aa-792e-435a-91b3-f7b32138e3f6
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 754036aa-792e-435a-91b3-f7b32138e3f6
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 93bf4028-47dc-4a4d-b808-f81eefc1f122
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/93bf4028-47dc-4a4d-b808-f81eefc1f122>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: a88faaf5-7dd1-413e-9ffe-d2dda9f2d252
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    controlsSlot: false
+    headerSlot: false
+    problemSlot: false
+    resolutionSlot: false
+    settingSlot: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - headerSlot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      settingSlot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      problemSlot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      resolutionSlot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      controlsSlot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input SceneObject headerSlot {"hint":"Authored prompt card anchor"}'
+    - '// @input SceneObject settingSlot {"hint":"Authored setting story anchor"}'
+    - '// @input SceneObject problemSlot {"hint":"Authored problem story anchor"}'
+    - '// @input SceneObject resolutionSlot {"hint":"Authored resolution story anchor"}'
+    - '// @input SceneObject controlsSlot {"hint":"Authored controls anchor"}'

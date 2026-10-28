@@ -1,0 +1,51 @@
+- !<AssetImportMetadata/0232da57-c530-4dc4-9023-fac064901bf6>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 3b8193ee-127b-49f3-8369-d0b7d7b05203
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 3b8193ee-127b-49f3-8369-d0b7d7b05203
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> a061fd99-fb32-4e0e-9561-6cca96f77b5b
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/a061fd99-fb32-4e0e-9561-6cca96f77b5b>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 627a3f28-187e-4060-8ca9-c2845b3acd8a
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    gapCm: false
+    widthCm: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - widthCm: !<float> 50.000000
+      gapCm: !<float> 1.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"label", "label":"PromptCraft — first native slice"}'
+    - '// @ui {"widget":"separator"}'
+    - '// @input float widthCm = 50 {"hint":"Panel width in centimeters", "widget":"slider", "min":40, "max":54, "step":1}'
+    - '// @input float gapCm = 1 {"hint":"Spacing between layout rows in centimeters", "widget":"slider", "min":0.5, "max":2, "step":0.1}'

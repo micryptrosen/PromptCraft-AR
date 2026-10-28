@@ -1,0 +1,55 @@
+- !<AssetImportMetadata/5fc11524-cc89-4b99-a26a-8fe267d4fb6b>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 5fc7a157-a01b-4b6d-9aff-66e051ef6167
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 5fc7a157-a01b-4b6d-9aff-66e051ef6167
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 0d9ad135-00c0-468b-9538-2c1254815137
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/0d9ad135-00c0-468b-9538-2c1254815137>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  VersionPrerelease: ""
+  UpdateOrder: 0
+  ComponentUid: 67dc2dab-f623-4927-80fc-7410e6e1d01f
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    connections: false
+    lab: false
+    recovery: false
+    view: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - view: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      connections: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      lab: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      recovery: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input AssignableType_1 view {"hint":"Passive laboratory view"}'
+    - '// @input AssignableType_2 connections {"hint":"Dynamic story connections"}'
+    - '// @input SceneObject lab {"hint":"Movable authored lab root"}'
+    - '// @input AssignableType_3 recovery {"hint":"Camera-relative recovery button"}'

@@ -1,0 +1,10 @@
+.private/
+node_modules/
+Cache/
+Temp/
+.DS_Store
+
+# Local agent governance and installed planning tools stay private.
+AGENTS.md
+.agents/
+skills-lock.json
